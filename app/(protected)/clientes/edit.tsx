@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Label, TextInput } from "flowbite-react";
-import { Client } from '../interfaces/client';
+import { Client } from '../../interfaces/client';
 import { updateClient } from "@/app/api/client"; // debes crearlo en tu API
 
 interface Props {

@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader, Label, TextInput, Select } from "flowbite-react";
 import { Product } from '@/app/interfaces/product';
+import { Category } from '@/app/interfaces/category';
 import { updateProduct } from '@/app/api/product';
 
 interface Props {
@@ -9,9 +10,10 @@ interface Props {
     onCloseModal: () => void;
     product: Product | null;
     onUpdateProduct: (product: Product) => void;
+    categories: Category[];  // Recibimos las categorías desde el componente padre
 }
 
-export function EditProductComponent({ openModal, onCloseModal, product, onUpdateProduct }: Props) {
+export function EditProductComponent({ openModal, onCloseModal, product, onUpdateProduct, categories }: Props) {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -20,7 +22,7 @@ export function EditProductComponent({ openModal, onCloseModal, product, onUpdat
         const updatedData: Product = {
             id: product.id,
             name: e.target.name.value,
-            id_category: Number(e.target.id_category.value),
+            id_category: e.target.id_category.value,  // Usamos el id de la categoría seleccionada
             description: e.target.description.value,
             stock: Number(e.target.stock.value),
             price: Number(e.target.price.value)
@@ -28,8 +30,8 @@ export function EditProductComponent({ openModal, onCloseModal, product, onUpdat
 
         try {
             const result = await updateProduct(updatedData);
-            onUpdateProduct(result);
-            onCloseModal();
+            onUpdateProduct(result); // Actualizar el producto en la lista
+            onCloseModal(); // Cerrar el modal después de actualizar el producto
         } catch (err: any) {
             console.error("Error updating product:", err);
         }
@@ -48,8 +50,15 @@ export function EditProductComponent({ openModal, onCloseModal, product, onUpdat
                             <TextInput id="name" type="text" defaultValue={product?.name} required />
                         </div>
                         <div className="w-1/2">
-                            <Label htmlFor="id_category">ID Categoría</Label>
-                            <TextInput id="id_category" type="number" defaultValue={product?.id_category} required />
+                            <Label htmlFor="id_category">Categoría</Label>
+                            <Select id="id_category" required defaultValue={product?.id_category}>
+                                {/* Iteramos sobre las categorías pasadas como prop */}
+                                {categories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.nombre}
+                                    </option>
+                                ))}
+                            </Select>
                         </div>
                     </div>
 

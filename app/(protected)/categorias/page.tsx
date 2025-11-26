@@ -3,40 +3,40 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Button } from "flowbite-react";
 import { useEffect, useState } from 'react';
 
-import { getProduct, deleteProduct } from '@/app/api/product';
-import { Product } from '../interfaces/product';
+import { getCategory, deleteCategory } from '@/app/api/category';
+import { Category } from '../../interfaces/category';
 
-import { CreateProductComponent } from "./create";
-import { EditProductComponent } from "./edit";
+import { CreateCategoryComponent } from "./create";
+import { EditCategoryComponent } from "./edit";
 
 import Swal from 'sweetalert2';
 
-export default function ProductComponent() {
+export default function CategoryComponent() {
 
-    const [products, setProducts] = useState<Product[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false);
-    const [productToEdit, setProductToEdit] = useState<Product | null>(null);
+    const [categoryToEdit, setCategoryToEdit] = useState<Category | null>(null);
 
-    const addProductToList = (newProduct: Product) => {
-        setProducts(prev => [...prev, newProduct]);
+    const addCategoryToList = (newCategory: Category) => {
+        setCategories(prev => [...prev, newCategory]);
     };
 
     useEffect(() => {
-        async function fetchProducts() {
+        async function fetchCategories() {
             try {
-                const result = await getProduct();
-                setProducts(result);
+                const result = await getCategory();
+                setCategories(result.data);
             } catch (err: any) {
-                console.error("Error loading products", err);
+                console.error("Error loading categories", err);
             }
         }
-        fetchProducts();
+        fetchCategories();
     }, []);
 
-    const handleDelete = (id: number) => {
+    const handleDelete = (id: string) => {
         Swal.fire({
-            title: '¿Deseas eliminar el producto?',
+            title: '¿Deseas eliminar la categoría?',
             text: 'Esta acción es irreversible',
             icon: 'warning',
             showCancelButton: true,
@@ -45,7 +45,7 @@ export default function ProductComponent() {
             cancelButtonText: 'Cancelar',
             preConfirm: async () => {
                 try {
-                    await deleteProduct(id);
+                    await deleteCategory(id);
                     return true;
                 } catch (err: any) {
                     Swal.close();
@@ -60,10 +60,11 @@ export default function ProductComponent() {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                setProducts(prev => prev.filter(p => p.id !== id));
+                setCategories(prev => prev.filter(cat => cat.id !== id));
+
                 Swal.fire({
-                    title: 'Producto eliminado',
-                    text: 'El producto se eliminó correctamente',
+                    title: 'Categoría eliminada',
+                    text: 'La categoría se eliminó correctamente',
                     icon: 'success',
                     confirmButtonColor: '#006EFD'
                 });
@@ -74,8 +75,8 @@ export default function ProductComponent() {
     return (
         <div className="overflow-x-auto">
             <div className="flex items-center justify-between p-2">
-                <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                    Productos
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-800">
+                    Categorías
                 </h1>
                 <Button pill onClick={() => setOpenModalCreate(true)}>Agregar</Button>
             </div>
@@ -85,28 +86,20 @@ export default function ProductComponent() {
                     <TableRow>
                         <TableHeadCell>ID</TableHeadCell>
                         <TableHeadCell>Nombre</TableHeadCell>
-                        <TableHeadCell>ID Categoría</TableHeadCell>
-                        <TableHeadCell>Descripción</TableHeadCell>
-                        <TableHeadCell>Stock</TableHeadCell>
-                        <TableHeadCell>Precio</TableHeadCell>
                         <TableHeadCell>Acciones</TableHeadCell>
                     </TableRow>
                 </TableHead>
 
                 <TableBody className="divide-y">
-                    {products.map((p) => (
-                        <TableRow key={p.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                            <TableCell>{p.id}</TableCell>
-                            <TableCell>{p.name}</TableCell>
-                            <TableCell>{p.id_category}</TableCell>
-                            <TableCell>{p.description}</TableCell>
-                            <TableCell>{p.stock}</TableCell>
-                            <TableCell>{p.price}</TableCell>
+                    {categories.map((cat) => (
+                        <TableRow key={cat.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                            <TableCell>{cat.id}</TableCell>
+                            <TableCell>{cat.nombre}</TableCell>
 
                             <TableCell className="flex gap-3">
                                 <button
                                     onClick={() => {
-                                        setProductToEdit(p);
+                                        setCategoryToEdit(cat);
                                         setOpenModalEdit(true);
                                     }}
                                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
@@ -115,7 +108,7 @@ export default function ProductComponent() {
                                 </button>
 
                                 <button
-                                    onClick={() => handleDelete(p.id)}
+                                    onClick={() => handleDelete(cat.id)}
                                     className="font-medium text-red-600 hover:underline dark:text-red-500"
                                 >
                                     Eliminar
@@ -126,26 +119,32 @@ export default function ProductComponent() {
                 </TableBody>
             </Table>
             {/* Modal Crear */}
-            {openModalCreate && (
-                <CreateProductComponent
-                    openModal={openModalCreate}
-                    onCloseModal={() => setOpenModalCreate(false)}
-                    onAddProduct={addProductToList}
-                />
-            )}
+            {
+                openModalCreate && (
+                    <CreateCategoryComponent
+                        openModal={openModalCreate}
+                        onCloseModal={() => setOpenModalCreate(false)}
+                        onAddCategory={addCategoryToList}
+                    />
+                )
+            }
 
             {/* Modal Editar */}
-            {openModalEdit && (
-                <EditProductComponent
-                    openModal={openModalEdit}
-                    onCloseModal={() => setOpenModalEdit(false)}
-                    product={productToEdit}
-                    onUpdateProduct={(updated: Product) =>
-                        setProducts(prev => prev.map(p => p.id === updated.id ? updated : p))
-                    }
-                />
-            )}
+            {
+                openModalEdit && (
+                    <EditCategoryComponent
+                        openModal={openModalEdit}
+                        onCloseModal={() => setOpenModalEdit(false)}
+                        category={categoryToEdit}
+                        onUpdateCategory={(updated: any) =>
+                            setCategories(prev => prev.map(c => c.id === updated.id ? updated : c))
+                        }
+                    />
+                )
+            }
 
         </div>
     );
 }
+
+

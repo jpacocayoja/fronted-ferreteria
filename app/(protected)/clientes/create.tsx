@@ -2,7 +2,7 @@
 
 import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
 import { createClient } from '@/app/api/client';
-import { Client } from '../interfaces/client';
+import { Client } from '../../interfaces/client';
 
 interface Props {
     onCloseModal: () => void;

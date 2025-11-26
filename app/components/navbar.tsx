@@ -31,7 +31,7 @@ export function NavbarComponent() {
                     <DropdownItem>Settings</DropdownItem>
                     <DropdownItem>Earnings</DropdownItem>
                     <DropdownDivider />
-                    <DropdownItem>Sign out</DropdownItem>
+                    <DropdownItem href="/login">Sign out</DropdownItem>
                 </Dropdown>
                 <NavbarToggle />
             </div>

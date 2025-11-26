@@ -3,7 +3,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Button } from "flowbite-react";
 import { useEffect, useState } from 'react';
 import { getClient, deleteClient } from '@/app/api/client';
-import { Client } from '../interfaces/client';
+import { Client } from '../../interfaces/client';
 import { CreateClientComponent } from "./create";
 import { EditClientComponent } from "./edit";
 import Swal from 'sweetalert2';
@@ -81,7 +81,7 @@ export default function ClientComponent() {
     return (
         <div className="overflow-x-auto">
             <div className="flex items-center justify-between p-2">
-                <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-800">
                     Clientes
                 </h1>
                 <Button pill onClick={() => setOpenModalCreate(true)} >Agregar</Button>

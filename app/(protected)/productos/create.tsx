@@ -1,16 +1,18 @@
 'use client';
 
-import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader, Label, TextInput, Select } from "flowbite-react";
 import { Product } from '@/app/interfaces/product';
+import { Category } from '@/app/interfaces/category';
 import { createProduct } from '@/app/api/product';
 
 interface Props {
     openModal: boolean;
     onCloseModal: () => void;
     onAddProduct: (product: Product) => void;
+    categories: Category[];  // Recibimos las categorías desde el componente padre
 }
 
-export function CreateProductComponent({ openModal, onCloseModal, onAddProduct }: Props) {
+export function CreateProductComponent({ openModal, onCloseModal, onAddProduct, categories }: Props) {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -18,16 +20,17 @@ export function CreateProductComponent({ openModal, onCloseModal, onAddProduct }
         const data: Product = {
             id: 0,
             name: e.target.name.value,
-            id_category: Number(e.target.id_category.value),
+            id_category: e.target.id_category.value,  // Usamos el id de la categoría seleccionada
             description: e.target.description.value,
             stock: Number(e.target.stock.value),
             price: Number(e.target.price.value)
         };
 
         try {
+            // Crear el producto usando la API
             const result = await createProduct(data);
-            onAddProduct(result);
-            onCloseModal();
+            onAddProduct(result); // Actualizar la lista de productos
+            onCloseModal(); // Cerrar el modal después de agregar el producto
         } catch (err: any) {
             console.error("Error creating product:", err);
         }
@@ -46,8 +49,15 @@ export function CreateProductComponent({ openModal, onCloseModal, onAddProduct }
                             <TextInput id="name" type="text" required />
                         </div>
                         <div className="w-1/2">
-                            <Label htmlFor="id_category">ID Categoría</Label>
-                            <TextInput id="id_category" type="number" required />
+                            <Label htmlFor="id_category">Categoría</Label>
+                            <Select id="id_category" required>
+                                {/* Iteramos sobre las categorías pasadas como prop */}
+                                {categories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.nombre}
+                                    </option>
+                                ))}
+                            </Select>
                         </div>
                     </div>
 

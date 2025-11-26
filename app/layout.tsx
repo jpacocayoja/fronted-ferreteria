@@ -33,17 +33,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex w-full">
-          <SidebarComponent />
-          <div className="flex flex-col w-full">
-            <NavbarComponent />
-            <main className="p-6">
-              <ThemeInit />
-              {children}
-            </main>
-          </div>
-        </div>
-
+        <main>
+          <ThemeInit />
+          {children}
+        </main>
       </body>
     </html>
   );
