@@ -1,7 +1,7 @@
 import { Category, CategoryResponse } from '@/app/interfaces/category';
+import { URL_CATEGORY } from './url';
 
-const baseUrl = "http://localhost:3002/api/categorias";
-
+const baseUrl = `${URL_CATEGORY}/api/categorias`;
 export async function getCategory(): Promise<CategoryResponse> {
     try {
         const res = await fetch(baseUrl, {

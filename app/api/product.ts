@@ -1,7 +1,8 @@
 // api/product.ts
 import { Product } from '@/app/interfaces/product';
+import { URL_PRODUCT } from './url';
 
-const baseUrl = "http://localhost:3003/api/products";
+const baseUrl = `${URL_PRODUCT}/api/products`;
 
 export async function getProduct(): Promise<Product[]> {
     try {

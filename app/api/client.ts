@@ -1,7 +1,7 @@
 import { ClientResponse, Client } from '@/app/interfaces/client';
+import { URL_CLIENT } from './url';
 
-const baseUrl = "http://localhost:3001/api/clientes";
-
+const baseUrl = `${URL_CLIENT}/api/clientes`;
 export async function getClient(): Promise<ClientResponse> {
     try {
         const res = await fetch(baseUrl, {
