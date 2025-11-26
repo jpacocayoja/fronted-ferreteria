@@ -1,4 +1,3 @@
-// api/product.ts
 import { Product } from '@/app/interfaces/product';
 import { URL_PRODUCT } from './url';
 
@@ -29,13 +28,15 @@ export async function getProduct(): Promise<Product[]> {
 
 export async function createProduct(data: Product): Promise<Product> {
     try {
+        // ❗ Extraemos el id y generamos un nuevo objeto sin el id
+        const { id: _, ...data2 } = data; // 👈 body = datos sin el id
         const res = await fetch(baseUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data2),
         });
 
         if (!res.ok) {
@@ -53,14 +54,15 @@ export async function createProduct(data: Product): Promise<Product> {
 export async function updateProduct(data: Product): Promise<Product> {
     try {
         const id = data.id;
-        delete data.id;
+        // ❗ Extraemos el id y generamos un nuevo objeto sin el id
+        const { id: _, ...data2 } = data; // 👈 body = datos sin el id
         const res = await fetch(`${baseUrl}/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data2),
         });
 
         if (!res.ok) {

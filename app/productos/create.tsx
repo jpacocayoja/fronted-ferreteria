@@ -16,6 +16,7 @@ export function CreateProductComponent({ openModal, onCloseModal, onAddProduct }
         e.preventDefault();
 
         const data: Product = {
+            id: 0,
             name: e.target.name.value,
             id_category: Number(e.target.id_category.value),
             description: e.target.description.value,
