@@ -84,7 +84,7 @@ export default function CategoryComponent() {
             <Table striped>
                 <TableHead>
                     <TableRow>
-                        <TableHeadCell>ID</TableHeadCell>
+                        {/*  <TableHeadCell>ID</TableHeadCell> */}
                         <TableHeadCell>Nombre</TableHeadCell>
                         <TableHeadCell>Acciones</TableHeadCell>
                     </TableRow>
@@ -93,7 +93,7 @@ export default function CategoryComponent() {
                 <TableBody className="divide-y">
                     {categories.map((cat) => (
                         <TableRow key={cat.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                            <TableCell>{cat.id}</TableCell>
+                            {/* <TableCell>{cat.id}</TableCell> */}
                             <TableCell>{cat.nombre}</TableCell>
 
                             <TableCell className="flex gap-3">

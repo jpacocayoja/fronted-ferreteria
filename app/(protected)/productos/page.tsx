@@ -89,7 +89,7 @@ export default function ProductComponent() {
                     <TableRow>
                         <TableHeadCell>ID</TableHeadCell>
                         <TableHeadCell>Nombre</TableHeadCell>
-                        <TableHeadCell>ID Categoría</TableHeadCell>
+                        <TableHeadCell>Categoría</TableHeadCell>
                         <TableHeadCell>Descripción</TableHeadCell>
                         <TableHeadCell>Stock</TableHeadCell>
                         <TableHeadCell>Precio</TableHeadCell>

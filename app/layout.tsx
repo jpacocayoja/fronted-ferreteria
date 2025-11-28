@@ -28,13 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <ThemeModeScript />
+        {/*  <ThemeModeScript /> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main>
-          <ThemeInit />
+          {/*  <ThemeInit /> */}
           {children}
         </main>
       </body>

@@ -16,7 +16,7 @@ export default function ProtectedLayout({
         <NavbarComponent />
 
         {/* Contenido de la página */}
-        <main className="p-6">
+        <main className="p-2">
           {children}
         </main>
       </div>

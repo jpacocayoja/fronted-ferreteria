@@ -89,7 +89,7 @@ export default function ClientComponent() {
             <Table striped>
                 <TableHead>
                     <TableRow>
-                        <TableHeadCell>ID</TableHeadCell>
+                        {/* <TableHeadCell>ID</TableHeadCell> */}
                         <TableHeadCell>Nombre</TableHeadCell>
                         <TableHeadCell>Apellidos</TableHeadCell>
                         <TableHeadCell>CI</TableHeadCell>
@@ -102,7 +102,7 @@ export default function ClientComponent() {
                 <TableBody className="divide-y">
                     {clients.map((client) => (
                         <TableRow key={client.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                            <TableCell>{client.id}</TableCell>
+                            {/*  <TableCell>{client.id}</TableCell> */}
                             <TableCell>{client.nombre}</TableCell>
                             <TableCell>{client.apellidos}</TableCell>
                             <TableCell>{client.ci}</TableCell>

@@ -9,6 +9,8 @@ import {
     HiUser,
 } from "react-icons/hi";
 import { TbCategoryFilled } from "react-icons/tb";
+import { FaShoppingCart } from "react-icons/fa";
+import { HiMiniDocumentText } from "react-icons/hi2";
 
 // 🔥 Array de items
 const menuItems = [
@@ -16,6 +18,8 @@ const menuItems = [
     { path: "/clientes", title: "Clientes", icon: HiUser },
     { path: "/productos", title: "Productos", icon: HiShoppingBag },
     { path: "/categorias", title: "Categorias", icon: TbCategoryFilled },
+    { path: "/ventas", title: "Ventas", icon: FaShoppingCart },
+    { path: "/reportes", title: "Reportes", icon: HiMiniDocumentText },
 ];
 
 export function SidebarComponent() {
