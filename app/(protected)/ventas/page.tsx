@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "@/app/interfaces/product";
 import { CartItem } from "@/app/interfaces/sale";
-import { getProduct } from "@/app/api/product";
+import { getProduct } from "@/app/services/product";
 import { CardComponent } from "../../components";
 import { CartModal } from "./cartModal";
 import { Button } from "flowbite-react";

@@ -2,8 +2,8 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Button } from "flowbite-react";
 import { useEffect, useState } from 'react';
-import { getSales } from '@/app/api/sale';
-import { getClient } from '@/app/api/client';
+import { getSales } from '@/app/services/sale';
+import { getClient } from '@/app/services/client';
 import { Sale } from '@/app/interfaces/sale';
 import { Client } from '@/app/interfaces/client';
 import { SaleDetailModal } from './saleDetailModal';

@@ -4,7 +4,7 @@ import { Modal, ModalHeader, ModalBody, Table, TableHead, TableRow, TableHeadCel
 import { useEffect, useState } from 'react';
 import { Sale, SaleDetails } from '@/app/interfaces/sale';
 import { Product } from '@/app/interfaces/product';
-import { getProduct } from '@/app/api/product';
+import { getProduct } from '@/app/services/product';
 
 interface Props {
     openModal: boolean;

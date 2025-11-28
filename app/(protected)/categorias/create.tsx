@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
-import { createCategory } from '@/app/api/category';
+import { createCategory } from '@/app/services/category';
 import { Category } from '@/app/interfaces/category';
 
 interface Props {

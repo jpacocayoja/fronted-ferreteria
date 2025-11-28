@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
-import { login } from "@/app/api/auth";   // <--- IMPORTANTE
+import { login } from "@/app/services/auth";   // <--- IMPORTANTE
 import { useRouter } from "next/navigation";
 
 export default function Component() {

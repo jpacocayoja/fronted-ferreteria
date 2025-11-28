@@ -2,7 +2,7 @@
 
 import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
 import { Category } from '@/app/interfaces/category';
-import { updateCategory } from "@/app/api/category"; // debes crearlo en tu API
+import { updateCategory } from "@/app/services/category"; // debes crearlo en tu API
 
 interface Props {
     onCloseModal: () => void;

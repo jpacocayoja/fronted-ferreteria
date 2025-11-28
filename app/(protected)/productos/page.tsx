@@ -3,8 +3,8 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Button } from "flowbite-react";
 import { useEffect, useState } from 'react';
 
-import { getProduct, deleteProduct } from '@/app/api/product';
-import { getCategory } from '@/app/api/category';
+import { getProduct, deleteProduct } from '@/app/services/product';
+import { getCategory } from '@/app/services/category';
 import { Product } from '../../interfaces/product';
 import { Category } from '../../interfaces/category';
 import { CreateProductComponent } from "./create";

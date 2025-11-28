@@ -3,7 +3,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Button } from "flowbite-react";
 import { useEffect, useState } from 'react';
 
-import { getCategory, deleteCategory } from '@/app/api/category';
+import { getCategory, deleteCategory } from '@/app/services/category';
 import { Category } from '../../interfaces/category';
 
 import { CreateCategoryComponent } from "./create";

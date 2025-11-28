@@ -3,7 +3,7 @@
 import { Button, Modal, ModalBody, ModalHeader, Label, TextInput, Select } from "flowbite-react";
 import { Product } from '@/app/interfaces/product';
 import { Category } from '@/app/interfaces/category';
-import { updateProduct } from '@/app/api/product';
+import { updateProduct } from '@/app/services/product';
 
 interface Props {
     openModal: boolean;

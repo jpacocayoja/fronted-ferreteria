@@ -2,7 +2,7 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow, Button } from "flowbite-react";
 import { useEffect, useState } from 'react';
-import { getClient, deleteClient } from '@/app/api/client';
+import { getClient, deleteClient } from '@/app/services/client';
 import { Client } from '../../interfaces/client';
 import { CreateClientComponent } from "./create";
 import { EditClientComponent } from "./edit";

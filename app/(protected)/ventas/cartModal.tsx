@@ -2,9 +2,9 @@
 
 import { Modal, ModalHeader, ModalBody, Button } from "flowbite-react";
 import { CartItem, Order, OrderDetail } from "@/app/interfaces/sale";
-import { createSale } from '@/app/api/sale';
+import { createSale } from '@/app/services/sale';
 import { useEffect, useState } from 'react';
-import { getClient } from '@/app/api/client';
+import { getClient } from '@/app/services/client';
 import { Client } from '../../interfaces/client';
 import { Select, Label } from "flowbite-react";
 
