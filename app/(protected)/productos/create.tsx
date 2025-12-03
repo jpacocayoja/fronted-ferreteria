@@ -4,6 +4,7 @@ import { Button, Modal, ModalBody, ModalHeader, Label, TextInput, Select } from 
 import { Product } from '@/app/interfaces/product';
 import { Category } from '@/app/interfaces/category';
 import { createProduct } from '@/app/services/product';
+import toast from 'react-hot-toast';
 
 interface Props {
     openModal: boolean;
@@ -30,9 +31,16 @@ export function CreateProductComponent({ openModal, onCloseModal, onAddProduct, 
             // Crear el producto usando la API
             const result = await createProduct(data);
             onAddProduct(result); // Actualizar la lista de productos
+
+            // Toast de éxito
+            toast.success("Producto agregado correctamente", { duration: 3000 });
+
             onCloseModal(); // Cerrar el modal después de agregar el producto
         } catch (err: any) {
             console.error("Error creating product:", err);
+
+            // Toast de error
+            toast.error("Error al crear el producto", { duration: 3000 });
         }
     };
 

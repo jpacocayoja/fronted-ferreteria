@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeInit } from "../.flowbite-react/init";
 import "./globals.css";
 import { SidebarComponent, NavbarComponent } from "./components";
-
+import { Toaster } from 'react-hot-toast';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         {/*  <ThemeModeScript /> */}
       </head>
@@ -36,6 +36,15 @@ export default function RootLayout({
         <main>
           {/*  <ThemeInit /> */}
           {children}
+          {/* Toaster global */}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: { fontSize: '14px' },
+              success: { style: { background: 'green', color: 'white' } },
+              error: { style: { background: 'red', color: 'white' } },
+            }}
+          />
         </main>
       </body>
     </html>

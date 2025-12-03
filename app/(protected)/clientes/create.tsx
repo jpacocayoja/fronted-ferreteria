@@ -3,12 +3,14 @@
 import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
 import { createClient } from '@/app/services/client';
 import { Client } from '../../interfaces/client';
+import toast from 'react-hot-toast';
 
 interface Props {
     onCloseModal: () => void;
     openModal: boolean;
     onAddClient: (client: Client) => void;   // NUEVO
 }
+
 export function CreateClientComponent({ onCloseModal, openModal, onAddClient }: Props) {
     const handleSubmit = async (e: any) => {
         e.preventDefault(); // evita refrescar la página
@@ -23,66 +25,71 @@ export function CreateClientComponent({ onCloseModal, openModal, onAddClient }: 
         try {
             const result: Client = await createClient(data);
             onAddClient(result);
+
+            // Toast de éxito
+            toast.success(`Cliente agregado correctamente`, {
+                duration: 3000,
+            });
+
             onCloseModal();
         } catch (error) {
+            // Toast de error
+            toast.error("Error al crear el cliente. Intente nuevamente.");
+            console.error(error);
         }
     };
 
     return (
-        <>
-            <Modal show={openModal} onClose={onCloseModal}>
-                <ModalHeader>Agregar Cliente</ModalHeader>
-                <ModalBody>
-                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <Modal show={openModal} onClose={onCloseModal}>
+            <ModalHeader>Agregar Cliente</ModalHeader>
+            <ModalBody>
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 
-                        {/* FILA 1: Nombre - Apellidos */}
-                        <div className="flex gap-4">
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="nombre">Nombre</Label>
-                                </div>
-                                <TextInput id="nombre" type="text" required />
-                            </div>
-
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="apellidos">Apellidos</Label>
-                                </div>
-                                <TextInput id="apellidos" type="text" required />
-                            </div>
-                        </div>
-
-                        {/* FILA 2: CI - Teléfono */}
-                        <div className="flex gap-4">
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="ci">CI</Label>
-                                </div>
-                                <TextInput id="ci" type="text" required />
-                            </div>
-
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="telefono">Teléfono</Label>
-                                </div>
-                                <TextInput id="telefono" type="text" required />
-                            </div>
-                        </div>
-
-                        {/* FILA 3: NIT */}
-                        <div>
+                    {/* FILA 1: Nombre - Apellidos */}
+                    <div className="flex gap-4">
+                        <div className="w-1/2">
                             <div className="mb-2 block">
-                                <Label htmlFor="nit">NIT</Label>
+                                <Label htmlFor="nombre">Nombre</Label>
                             </div>
-                            <TextInput id="nit" type="text" required />
+                            <TextInput id="nombre" type="text" required />
                         </div>
 
-                        <Button type="submit">Guardar</Button>
-                    </form>
+                        <div className="w-1/2">
+                            <div className="mb-2 block">
+                                <Label htmlFor="apellidos">Apellidos</Label>
+                            </div>
+                            <TextInput id="apellidos" type="text" required />
+                        </div>
+                    </div>
 
+                    {/* FILA 2: CI - Teléfono */}
+                    <div className="flex gap-4">
+                        <div className="w-1/2">
+                            <div className="mb-2 block">
+                                <Label htmlFor="ci">CI</Label>
+                            </div>
+                            <TextInput id="ci" type="text" required />
+                        </div>
 
-                </ModalBody>
-            </Modal>
-        </>
+                        <div className="w-1/2">
+                            <div className="mb-2 block">
+                                <Label htmlFor="telefono">Teléfono</Label>
+                            </div>
+                            <TextInput id="telefono" type="text" required />
+                        </div>
+                    </div>
+
+                    {/* FILA 3: NIT */}
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="nit">NIT</Label>
+                        </div>
+                        <TextInput id="nit" type="text" required />
+                    </div>
+
+                    <Button type="submit">Guardar</Button>
+                </form>
+            </ModalBody>
+        </Modal>
     );
 }
