@@ -3,6 +3,7 @@
 import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
 import { Category } from '@/app/interfaces/category';
 import { updateCategory } from "@/app/services/category"; // debes crearlo en tu API
+import toast from 'react-hot-toast';
 
 interface Props {
     onCloseModal: () => void;
@@ -26,9 +27,16 @@ export function EditCategoryComponent({ onCloseModal, openModal, category, onUpd
         try {
             const result = await updateCategory(updatedData);
             onUpdateCategory(result); // actualiza la tabla
+
+            // Toast de éxito
+            toast.success("Categoría actualizada correctamente", { duration: 3000 });
+
             onCloseModal();
         } catch (err) {
             console.error("Error updating category:", err);
+
+            // Toast de error
+            toast.error("Error al actualizar la categoría", { duration: 3000 });
         }
     };
 

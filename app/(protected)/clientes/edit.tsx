@@ -1,8 +1,9 @@
 "use client";
 
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Label, TextInput } from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader, Label, TextInput } from "flowbite-react";
 import { Client } from '../../interfaces/client';
 import { updateClient } from "@/app/services/client"; // debes crearlo en tu API
+import toast from 'react-hot-toast';
 
 interface Props {
     onCloseModal: () => void;
@@ -30,90 +31,94 @@ export function EditClientComponent({ onCloseModal, openModal, client, onUpdateC
         try {
             const result = await updateClient(updatedData);
             onUpdateClient(result); // actualiza la tabla
+
+            // Toast de éxito
+            toast.success("Cliente actualizado correctamente", { duration: 3000 });
+
             onCloseModal();
         } catch (err) {
-            console.log(err);
+            // Toast de error
+            toast.error("Error al actualizar el cliente", { duration: 3000 });
+            console.error(err);
         }
     };
 
     return (
-        <>
-            <Modal show={openModal} onClose={onCloseModal}>
-                <ModalHeader>Editar Cliente</ModalHeader>
-                <ModalBody>
-                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <Modal show={openModal} onClose={onCloseModal}>
+            <ModalHeader>Editar Cliente</ModalHeader>
+            <ModalBody>
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 
-                        {/* FILA 1: Nombre - Apellidos */}
-                        <div className="flex gap-4">
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="nombre">Nombre</Label>
-                                </div>
-                                <TextInput
-                                    id="nombre"
-                                    type="text"
-                                    defaultValue={client?.nombre}
-                                    required
-                                />
-                            </div>
-
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="apellidos">Apellidos</Label>
-                                </div>
-                                <TextInput
-                                    id="apellidos"
-                                    type="text"
-                                    defaultValue={client?.apellidos}
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        {/* FILA 2: CI - Teléfono */}
-                        <div className="flex gap-4">
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="ci">CI</Label>
-                                </div>
-                                <TextInput
-                                    id="ci"
-                                    type="text"
-                                    defaultValue={client?.ci}
-                                    required
-                                />
-                            </div>
-
-                            <div className="w-1/2">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="telefono">Teléfono</Label>
-                                </div>
-                                <TextInput
-                                    id="telefono"
-                                    type="text"
-                                    defaultValue={client?.telefono}
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        {/* FILA 3: NIT */}
-                        <div>
+                    {/* FILA 1: Nombre - Apellidos */}
+                    <div className="flex gap-4">
+                        <div className="w-1/2">
                             <div className="mb-2 block">
-                                <Label htmlFor="nit">NIT</Label>
+                                <Label htmlFor="nombre">Nombre</Label>
                             </div>
                             <TextInput
-                                id="nit"
+                                id="nombre"
                                 type="text"
-                                defaultValue={client?.nit}
+                                defaultValue={client?.nombre}
                                 required
                             />
                         </div>
 
-                        <Button type="submit">Guardar Cambios</Button>
-                    </form>
-                </ModalBody>
-            </Modal>
-        </>
+                        <div className="w-1/2">
+                            <div className="mb-2 block">
+                                <Label htmlFor="apellidos">Apellidos</Label>
+                            </div>
+                            <TextInput
+                                id="apellidos"
+                                type="text"
+                                defaultValue={client?.apellidos}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* FILA 2: CI - Teléfono */}
+                    <div className="flex gap-4">
+                        <div className="w-1/2">
+                            <div className="mb-2 block">
+                                <Label htmlFor="ci">CI</Label>
+                            </div>
+                            <TextInput
+                                id="ci"
+                                type="text"
+                                defaultValue={client?.ci}
+                                required
+                            />
+                        </div>
+
+                        <div className="w-1/2">
+                            <div className="mb-2 block">
+                                <Label htmlFor="telefono">Teléfono</Label>
+                            </div>
+                            <TextInput
+                                id="telefono"
+                                type="text"
+                                defaultValue={client?.telefono}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* FILA 3: NIT */}
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="nit">NIT</Label>
+                        </div>
+                        <TextInput
+                            id="nit"
+                            type="text"
+                            defaultValue={client?.nit}
+                            required
+                        />
+                    </div>
+
+                    <Button type="submit">Guardar Cambios</Button>
+                </form>
+            </ModalBody>
+        </Modal>
     );
 }

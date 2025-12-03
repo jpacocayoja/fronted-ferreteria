@@ -4,6 +4,7 @@ import { Button, Modal, ModalBody, ModalHeader, Label, TextInput, Select } from 
 import { Product } from '@/app/interfaces/product';
 import { Category } from '@/app/interfaces/category';
 import { updateProduct } from '@/app/services/product';
+import toast from 'react-hot-toast';
 
 interface Props {
     openModal: boolean;
@@ -31,9 +32,16 @@ export function EditProductComponent({ openModal, onCloseModal, product, onUpdat
         try {
             const result = await updateProduct(updatedData);
             onUpdateProduct(result); // Actualizar el producto en la lista
+
+            // Toast de éxito
+            toast.success("Producto actualizado correctamente", { duration: 3000 });
+
             onCloseModal(); // Cerrar el modal después de actualizar el producto
         } catch (err: any) {
             console.error("Error updating product:", err);
+
+            // Toast de error
+            toast.error("Error al actualizar el producto", { duration: 3000 });
         }
     };
 
@@ -52,7 +60,6 @@ export function EditProductComponent({ openModal, onCloseModal, product, onUpdat
                         <div className="w-1/2">
                             <Label htmlFor="id_category">Categoría</Label>
                             <Select id="id_category" required defaultValue={product?.id_category}>
-                                {/* Iteramos sobre las categorías pasadas como prop */}
                                 {categories.map((category) => (
                                     <option key={category.id} value={category.id}>
                                         {category.nombre}

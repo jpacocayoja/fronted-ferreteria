@@ -7,6 +7,7 @@ import { Client } from '../../interfaces/client';
 import { CreateClientComponent } from "./create";
 import { EditClientComponent } from "./edit";
 import Swal from 'sweetalert2';
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 
 export default function ClientComponent() {
@@ -114,13 +115,18 @@ export default function ClientComponent() {
                                         setClientToEdit(client);   // → PASAS TODOS LOS DATOS
                                         setOpenModalEdit(true);    // → ABRES EL MODAL
                                     }}
-                                    className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                                    Editar
+                                    className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
+                                    title="Editar"
+                                >
+                                    <FiEdit size={20} />
                                 </button>
+
                                 <button
                                     onClick={() => handleDelete(client.id)}
-                                    className="font-medium text-red-600 hover:underline dark:text-red-500">
-                                    Eliminar
+                                    className="text-red-600 dark:text-red-400 hover:text-red-500 dark:hover:text-red-300"
+                                    title="Eliminar"
+                                >
+                                    <FiTrash2 size={20} />
                                 </button>
                             </TableCell>
                         </TableRow>
